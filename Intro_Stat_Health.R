@@ -7,11 +7,32 @@ COPD <- read.csv("COPD_student.csv",header = T,
                  sep = ",",stringsAsFactors = T)
 
 str(COPD)
+
+library(Hmisc)
+describe(COPD)
+library(gmodels)
+## to tabulate data
+CrossTable(COPD$copd)
+sum(is.na(COPD$COPDSEVERITY))
+
 library(swirl)
-lm1 <- lm(MWT1Best~AGE,data = COPD)
+lm1 <- lm(MWT1Best~factor(Diabetes)+factor(AtrialFib)
+          +factor(Diabetes*AtrialFib),data = COPD)
 summary(lm1)
 
 confint(lm1)
+
+library(prediction)
+list("Diabetes"=prediction(lm1,at = list("Diabetes"=c(0,1))))
+
+###
+lm <- lm(MWT1Best~factor(Diabetes)+factor(IHD)
+          +factor(Diabetes*IHD),data = COPD)
+summary(lm)
+
+library(mctest)
+# to check collinearity by examing the VIF
+imcdiag(lm1,method = "VIF",vif = 5)
 
 ##############################
 
@@ -56,7 +77,7 @@ h <- function(x, y = NULL, d = 3L) {
 }
 
 #############
-file.create("pollutantmeans") 
+ 
 pollutantmean <- function(directory,pollutant,id=1:332){
   repert <- "D:/Desktop/Coursera_Certificats/datasciencecoursera/" 
   data <- NULL
@@ -223,4 +244,89 @@ hw <- read.csv("hw1_data.csv",header = T,
 
 ###################################
 x <- list(a=1:5,b=rnorm(10))
-lapply(X = x,FUN = mean)
+sapply(X = x,FUN = mean)
+y <- matrix(rnorm(200),20,10)
+apply(y,2,mean)
+rowMeans(y)
+colMeans(y)
+rowSums(y)
+x <- c(rnorm(10),runif(10),rnorm(10,1))
+f <- gl(3,10)
+tapply(x,f,range)
+split(x,f)
+library(datasets)
+s <- split(airquality,airquality$Month)
+sapply(s,function(x)colMeans(x[,c("Ozone","Solar.R","Wind")],
+                             na.rm = T))
+
+#########
+lm(y~x)
+traceback()
+debug(lm)
+browser()
+trace(lm)
+recover()
+
+####################################
+boring_function <- function(x) {
+  x
+}
+
+library(datasets)
+data(iris)
+?iris
+vv <- subset(iris,Species=="virginica")
+mean(vv$Sepal.Length)
+data(mtcars)
+
+sapply(split(mtcars$hp, mtcars$cyl), mean)
+
+
+apply(iris, 2, mean)
+
+
+rowMeans(iris[, 1:4])
+
+
+apply(iris[, 1:4], 2, mean)
+
+
+apply(iris, 1, mean)
+
+
+apply(iris[, 1:4], 1, mean)
+
+
+colMeans(iris)
+
+##################
+apply(mtcars, 2, mean)
+
+
+mean(mtcars$mpg, mtcars$cyl)
+
+
+split(mtcars, mtcars$cyl)
+
+
+with(mtcars, tapply(mpg, cyl, mean))
+
+Correct
+
+sapply(split(mtcars$mpg, mtcars$cyl), mean)
+
+Correct
+
+tapply(mtcars$mpg, mtcars$cyl, mean)
+
+Correct
+
+tapply(mtcars$cyl, mtcars$mpg, mean)
+
+
+sapply(mtcars, cyl, mean)
+
+
+lapply(mtcars, mean)
+
+
