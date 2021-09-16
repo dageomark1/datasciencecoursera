@@ -1,0 +1,251 @@
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+ <html lang="en"> 
+     <head> 
+         <title>Cartesian Coordinates Map</title> 
+         <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> 
+         <style type="text/css"> 
+         body {background-color: #f0f8ff;}
+         #chartContainer{ overflow: hidden; }
+         .chart-options{ display:none; }
+         .chart-options{ padding:10px 0 10px 0; background-color:#e6eef2; border:1px solid silver; }
+         .options-row{ margin:0 10px 10px 10px }
+         .options-row>label:first-child, .options-row detail{ color:#13369f; font-weight:bold; }
+         .options-row input[type='radio']{ margin:5px }
+         p.help-block{ font-size:11px; color:#666; font-style:oblique; margin-top:0; }
+         .main-content{ margin: 5px; }
+         .options-row label{ font-weight: normal; }
+         input[type=checkbox]{ margin-right:5px; }
+         label.option-section{ border-bottom: solid 1px #e6e9eb; width: 100 % ; }
+         .chart-column{ padding-top: 20px; padding-bottom: 30px; border-left: 1px solid #ddd; }
+         .print-section a{ padding-right: 20px; text-decoration: none; }
+         .cluster-selection{ border-bottom: dashed 1px #e6e9eb; }
+         .cluster-selection label{ white-space: nowrap; color: #313030; }
+         #id_display_count { margin:10px; }
+         fieldset { margin-top: 10px; }
+         @media print{ title, #banner,.chart-options-section{ display: none; } #chartContainer{ margin: 20px; }.chart-column{ border-left: 0; } }
+         </style> 
+         <script type='text/javascript' src='https://www.satscan.org/javascript/jquery/jquery-1.12.4/jquery-1.12.4.js'></script> 
+         <script type='text/javascript' src='https://www.satscan.org/javascript/clustercharts/jQuery.resizeEnd.js'></script> 
+         <script type="text/javascript"> 
+             jQuery.noConflict(); 
+         </script> 
+         <script type='text/javascript' src='https://www.satscan.org/javascript/clustercharts/mootools-1.6.0/MooTools-Core-1.6.0.js'></script> 
+         <script type='text/javascript' src='https://www.satscan.org/javascript/clustercharts/clusterchart-1.1.js'></script> 
+         <script type='text/javascript' src='https://www.satscan.org/javascript/clustercharts/mootools-1.6.0/MooTools-More-1.6.0.js'></script> 
+         <script type='text/javascript' src='https://www.satscan.org/javascript/clustercharts/FileSaver-2014-06-24.js'></script> 
+         <script type='text/javascript' src='https://www.satscan.org/javascript/clustercharts/Blob-2014-07-24.js'></script> 
+         <script type='text/javascript' src='https://www.satscan.org/javascript/clustercharts/canvas-toBlob-2016-05-26.js'></script> 
+         <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script> 
+         <script type='text/javascript'> 
+          var clusters = [ 
+             { id: 1, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 2.532914, y : 6.617559, z : 0.000859, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 1</div>Population : 75<br>Number of cases : 15<br>Expected cases : 0.55<br>Observed / expected : 27.23<br>Relative risk : 29.80<br>P-value : < 0.00000000000000001<br>', points : [[2.532914, 6.617559],[2.532417, 6.616858]] },
+{ id: 2, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 2.530041, y : 6.615347, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 2</div>Population : 105<br>Number of cases : 15<br>Expected cases : 0.77<br>Observed / expected : 19.45<br>Relative risk : 21.26<br>P-value : 0.0000000000000027<br>', points : [[2.530041, 6.615347]] },
+{ id: 3, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 2.529933, y : 6.616626, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 3</div>Population : 20<br>Number of cases : 8<br>Expected cases : 0.15<br>Observed / expected : 54.46<br>Relative risk : 57.13<br>P-value : 0.0000000000062<br>', points : [[2.529933, 6.616626]] },
+{ id: 4, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 1.807665, y : 6.537118, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 4</div>Population : 90<br>Number of cases : 10<br>Expected cases : 0.66<br>Observed / expected : 15.13<br>Relative risk : 16.02<br>P-value : 0.0000000094<br>', points : [[1.807665, 6.537118]] },
+{ id: 5, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 1.805340, y : 6.537335, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 5</div>Population : 150<br>Number of cases : 10<br>Expected cases : 1.10<br>Observed / expected : 9.08<br>Relative risk : 9.59<br>P-value : 0.0000023<br>', points : [[1.805340, 6.537335]] },
+{ id: 6, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 2.532538, y : 6.612167, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 6</div>Population : 22<br>Number of cases : 5<br>Expected cases : 0.16<br>Observed / expected : 30.94<br>Relative risk : 31.86<br>P-value : 0.0000076<br>', points : [[2.532538, 6.612167]] },
+{ id: 7, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 2.553782, y : 6.555483, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 7</div>Population : 30<br>Number of cases : 5<br>Expected cases : 0.22<br>Observed / expected : 22.69<br>Relative risk : 23.36<br>P-value : 0.000044<br>', points : [[2.553782, 6.555483]] },
+{ id: 8, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 2.695748, y : 6.518192, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 8</div>Population : 45<br>Number of cases : 5<br>Expected cases : 0.33<br>Observed / expected : 15.13<br>Relative risk : 15.56<br>P-value : 0.00042<br>', points : [[2.695748, 6.518192]] },
+{ id: 9, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 1.805340, y : 6.437335, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 9</div>Population : 120<br>Number of cases : 7<br>Expected cases : 0.88<br>Observed / expected : 7.94<br>Relative risk : 8.24<br>P-value : 0.00074<br>', points : [[1.805340, 6.437335]] },
+{ id: 10, significant : true, highrate : false, hierarchical : true, gini : true, ellipse : false, x : 1.634770, y : 6.609337, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#5F8EBD', pointscolor : '#1AC6FF', tip : '<div style="text-decoration:underline; ">Cluster 10</div>Population : 1001<br>Number of cases : 0<br>Expected cases : 7.35<br>Observed / expected : 0<br>Relative risk : 0<br>P-value : 0.0024<br>', points : [[1.634770, 6.609337]] },
+{ id: 11, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 2.695802, y : 6.512659, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 11</div>Population : 15<br>Number of cases : 3<br>Expected cases : 0.11<br>Observed / expected : 27.23<br>Relative risk : 27.71<br>P-value : 0.0041<br>', points : [[2.695802, 6.512659]] },
+{ id: 12, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 2.575755, y : 6.572269, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 12</div>Population : 80<br>Number of cases : 5<br>Expected cases : 0.59<br>Observed / expected : 8.51<br>Relative risk : 8.74<br>P-value : 0.017<br>', points : [[2.575755, 6.572269]] },
+{ id: 13, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 2.550276, y : 6.633602, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 13</div>Population : 20<br>Number of cases : 3<br>Expected cases : 0.15<br>Observed / expected : 20.42<br>Relative risk : 20.77<br>P-value : 0.021<br>', points : [[2.550276, 6.633602]] },
+{ id: 14, significant : true, highrate : false, hierarchical : true, gini : true, ellipse : false, x : 2.708346, y : 6.729268, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#5F8EBD', pointscolor : '#1AC6FF', tip : '<div style="text-decoration:underline; ">Cluster 14</div>Population : 820<br>Number of cases : 0<br>Expected cases : 6.02<br>Observed / expected : 0<br>Relative risk : 0<br>P-value : 0.022<br>', points : [[2.708346, 6.729268]] },
+{ id: 15, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 2.534448, y : 6.630368, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 15</div>Population : 58<br>Number of cases : 4<br>Expected cases : 0.43<br>Observed / expected : 9.39<br>Relative risk : 9.59<br>P-value : 0.028<br>', points : [[2.534448, 6.630368]] },
+{ id: 16, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 1.664320, y : 6.614103, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 16</div>Population : 100<br>Number of cases : 5<br>Expected cases : 0.73<br>Observed / expected : 6.81<br>Relative risk : 6.99<br>P-value : 0.033<br>', points : [[1.664320, 6.614103]] },
+{ id: 17, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 2.547602, y : 6.533238, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 17</div>Population : 30<br>Number of cases : 3<br>Expected cases : 0.22<br>Observed / expected : 13.61<br>Relative risk : 13.84<br>P-value : 0.045<br>', points : [[2.547602, 6.533238]] },
+{ id: 18, significant : true, highrate : true, hierarchical : true, gini : true, ellipse : false, x : 2.650665, y : 6.498793, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 18</div>Population : 30<br>Number of cases : 3<br>Expected cases : 0.22<br>Observed / expected : 13.61<br>Relative risk : 13.84<br>P-value : 0.045<br>', points : [[2.650665, 6.498793]] },
+{ id: 19, significant : false, highrate : true, hierarchical : true, gini : false, ellipse : false, x : 2.613145, y : 6.662028, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 19</div>Population : 19<br>Number of cases : 2<br>Expected cases : 0.14<br>Observed / expected : 14.33<br>Relative risk : 14.49<br>P-value : 0.206<br>', points : [[2.613145, 6.662028]] },
+{ id: 20, significant : false, highrate : true, hierarchical : true, gini : false, ellipse : false, x : 2.663049, y : 6.485398, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 20</div>Population : 20<br>Number of cases : 2<br>Expected cases : 0.15<br>Observed / expected : 13.61<br>Relative risk : 13.77<br>P-value : 0.238<br>', points : [[2.663049, 6.485398]] },
+{ id: 21, significant : false, highrate : false, hierarchical : true, gini : false, ellipse : false, x : 2.709683, y : 6.780975, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#5F8EBD', pointscolor : '#1AC6FF', tip : '<div style="text-decoration:underline; ">Cluster 21</div>Population : 453<br>Number of cases : 0<br>Expected cases : 3.33<br>Observed / expected : 0<br>Relative risk : 0<br>P-value : 0.271<br>', points : [[2.709683, 6.780975]] },
+{ id: 22, significant : false, highrate : false, hierarchical : true, gini : false, ellipse : false, x : 2.584530, y : 6.571723, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#5F8EBD', pointscolor : '#1AC6FF', tip : '<div style="text-decoration:underline; ">Cluster 22</div>Population : 400<br>Number of cases : 0<br>Expected cases : 2.94<br>Observed / expected : 0<br>Relative risk : 0<br>P-value : 0.408<br>', points : [[2.584530, 6.571723]] },
+{ id: 23, significant : false, highrate : false, hierarchical : true, gini : false, ellipse : false, x : 2.553477, y : 6.631544, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#5F8EBD', pointscolor : '#1AC6FF', tip : '<div style="text-decoration:underline; ">Cluster 23</div>Population : 350<br>Number of cases : 0<br>Expected cases : 2.57<br>Observed / expected : 0<br>Relative risk : 0<br>P-value : 0.540<br>', points : [[2.553477, 6.631544]] },
+{ id: 24, significant : false, highrate : false, hierarchical : true, gini : false, ellipse : false, x : 2.610508, y : 6.665477, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#5F8EBD', pointscolor : '#1AC6FF', tip : '<div style="text-decoration:underline; ">Cluster 24</div>Population : 315<br>Number of cases : 0<br>Expected cases : 2.31<br>Observed / expected : 0<br>Relative risk : 0<br>P-value : 0.658<br>', points : [[2.610508, 6.665477]] },
+{ id: 25, significant : false, highrate : false, hierarchical : true, gini : false, ellipse : false, x : 1.699410, y : 6.592151, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#5F8EBD', pointscolor : '#1AC6FF', tip : '<div style="text-decoration:underline; ">Cluster 25</div>Population : 623<br>Number of cases : 1<br>Expected cases : 4.58<br>Observed / expected : 0.22<br>Relative risk : 0.21<br>P-value : 0.797<br>', points : [[1.699410, 6.592151]] },
+{ id: 26, significant : false, highrate : false, hierarchical : true, gini : false, ellipse : false, x : 2.711413, y : 6.773268, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#5F8EBD', pointscolor : '#1AC6FF', tip : '<div style="text-decoration:underline; ">Cluster 26</div>Population : 230<br>Number of cases : 0<br>Expected cases : 1.69<br>Observed / expected : 0<br>Relative risk : 0<br>P-value : 0.905<br>', points : [[2.711413, 6.773268]] },
+{ id: 27, significant : false, highrate : true, hierarchical : true, gini : false, ellipse : false, x : 2.690543, y : 6.510468, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 27</div>Population : 65<br>Number of cases : 2<br>Expected cases : 0.48<br>Observed / expected : 4.19<br>Relative risk : 4.23<br>P-value : 0.961<br>', points : [[2.690543, 6.510468]] },
+{ id: 28, significant : false, highrate : false, hierarchical : true, gini : false, ellipse : false, x : 2.607401, y : 6.668498, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#5F8EBD', pointscolor : '#1AC6FF', tip : '<div style="text-decoration:underline; ">Cluster 28</div>Population : 180<br>Number of cases : 0<br>Expected cases : 1.32<br>Observed / expected : 0<br>Relative risk : 0<br>P-value : 0.969<br>', points : [[2.607401, 6.668498]] },
+{ id: 29, significant : false, highrate : false, hierarchical : true, gini : false, ellipse : false, x : 2.695083, y : 6.520058, z : 0.000703, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#5F8EBD', pointscolor : '#1AC6FF', tip : '<div style="text-decoration:underline; ">Cluster 29</div>Population : 160<br>Number of cases : 0<br>Expected cases : 1.18<br>Observed / expected : 0<br>Relative risk : 0<br>P-value : 0.993<br>', points : [[2.695083, 6.520058],[2.694805, 6.519742],[2.694783, 6.520694]] },
+{ id: 30, significant : false, highrate : true, hierarchical : true, gini : false, ellipse : false, x : 2.689018, y : 6.484699, z : 0.000000, semimajor : 0.000000, angle : 0.00, shape : 0.00, color : '#F13C3F', pointscolor : '#FF1A1A', tip : '<div style="text-decoration:underline; ">Cluster 30</div>Population : 150<br>Number of cases : 3<br>Expected cases : 1.10<br>Observed / expected : 2.72<br>Relative risk : 2.75<br>P-value : 0.998<br>', points : [[2.689018, 6.484699]] } 
+             ]; 
+             var chart = null; 
+             var parameters = {scanrate:3/*high=1,low=2,highorlow=3*/,giniscan:true};
+             var cluster_region = {zmin:0,zmax:1,xsteps:3,ysteps:3,bubbleSize:8,xmin:1.000000,xmax:3.000000,ymin:6.000000,ymax:8.000000}; 
+             var cluster_region_points = [[2.579655, 6.574849],[2.581271, 6.567012],[2.696273, 6.518256],[2.694338, 6.515764],[2.695009, 6.514831],[2.534811, 6.627575],[2.695166, 6.513881],[2.706621, 6.466923],[2.694661, 6.483818],[2.670903, 6.458298],[2.625761, 6.827883],[2.640362, 6.720409],[2.708346, 6.769268],[2.707763, 6.768051],[2.732923, 6.766104],[1.810951, 6.765606],[1.812461, 6.476298],[2.556056, 6.632208],[1.811320, 6.485620],[1.812772, 6.527377],[1.807750, 6.537462],[1.805347, 6.537335],[1.665727, 6.617218],[1.665822, 6.613521],[1.712929, 6.590996],[1.710303, 6.596223],[2.615733, 6.662503],[2.614230, 6.662363],[2.613217, 6.666571],[2.610440, 6.665783],[2.650155, 6.497269]]; 
+             var entire_region = {zmin:0,zmax:1,xsteps:3,ysteps:3,bubbleSize:8,xmin:1.000000,xmax:3.000000,ymin:6.000000,ymax:8.000000}; 
+             var entire_region_points = [[2.579655, 6.574849],[2.581271, 6.567012],[2.696273, 6.518256],[2.694338, 6.515764],[2.695009, 6.514831],[2.534811, 6.627575],[2.695166, 6.513881],[2.706621, 6.466923],[2.694661, 6.483818],[2.670903, 6.458298],[2.625761, 6.827883],[2.640362, 6.720409],[2.708346, 6.769268],[2.707763, 6.768051],[2.732923, 6.766104],[1.810951, 6.765606],[1.812461, 6.476298],[2.556056, 6.632208],[1.811320, 6.485620],[1.812772, 6.527377],[1.807750, 6.537462],[1.805347, 6.537335],[1.665727, 6.617218],[1.665822, 6.613521],[1.712929, 6.590996],[1.710303, 6.596223],[2.615733, 6.662503],[2.614230, 6.662363],[2.613217, 6.666571],[2.610440, 6.665783],[2.650155, 6.497269]]; 
+             var display_stats = {};
+ 			function inViewport(el) {
+                 var elH = jQuery(el).outerHeight(), H = jQuery(window).height(), r = jQuery(el)[0].getBoundingClientRect(), t = r.top, b = r.bottom;
+                 return Math.max(0, t > 0 ? Math.min(elH, H - t) : (b < H ? b : H));
+             }
+             function showGraph() { 
+                var region = jQuery('#id_zoom_cluster_region').is(':checked') ? jQuery.extend({}, cluster_region) : jQuery.extend({}, entire_region); 
+                var row = jQuery('.row'); 
+                var options_div = jQuery('.chart-options-section'); 
+                var dimension;
+                if (jQuery('#id_fit_graph_viewport').is(':checked'))
+                   dimension = Math.max(jQuery(window).height() - jQuery('#id_banner').height(), inViewport('.row')) - 50;
+                else
+                  dimension = Math.max(jQuery(row).width() - jQuery(options_div).width() - 100, jQuery(options_div).width() - 50);
+                jQuery('.chart-column').html("<div id = 'chartContainer' name = 'chartContainer' style = 'margin-left: 20px;'></div>"); 
+                chart = new Chart.Bubble('chartContainer', {zmin:region.zmin,zmax:region.zmax,xsteps:region.xsteps,ysteps:region.ysteps,bubbleSize:region.bubbleSize,xmin:region.xmin,xmax:region.xmax,ymin:region.ymin,ymax:region.ymax,width:dimension,height:dimension,
+                                         title: jQuery('.title-setter').val() || 'Cartesian Coordinates Map',
+                                         points_mouseoveronly: false, 
+                                         x_sinusoidal_factor: 0.993390, 
+                                         showGrid:document.getElementById('id_show_grid_lines').checked, 
+                                         showAxes:document.getElementById('id_show_axes').checked});  
+                 display_stats = {displayed_clusters: 0, displayed_cluster_points: 0, displayed_points: 0};
+                 jQuery.each(clusters, function(i, c) { 
+                     var add = true;
+                     if (parameters.scanrate == 3) {
+                         if (jQuery('#id_view_high').is(':checked')) add &= (c.highrate == true);
+                         if (jQuery('#id_view_low').is(':checked')) add &= (c.highrate == false);
+                     }
+                     if (jQuery('#id_hierarchical').is(':checked') && jQuery('#id_gini').is(':checked')) add &= (c.hierarchical == true && c.gini == true);
+                     else if (jQuery('#id_hierarchical').is(':checked')) add &= (c.hierarchical == true);
+                     else if (jQuery('#id_gini').is(':checked')) add &= (c.gini == true);
+                     else add &= true;
+                     if (jQuery('#id_view_significant').is(':checked')) add &= (c.significant == true);
+                     if (add && jQuery('#id_cluster_circles').is(':checked')) {
+                         if (c.ellipse)
+                             chart.addEllipticBubble(c.id, c.x, c.y, c.z, c.semimajor, c.angle, c.shape, c.color, c.tip);
+                         else
+                             chart.addBubble(c.id, c.x, c.y, c.z, c.color, c.tip);
+                         display_stats.displayed_clusters++;
+                     }
+                     if (add && jQuery('#id_cluster_locations').is(':checked')) {
+                         chart.addPoints(c.id, c.points, c.pointscolor);
+                         display_stats.displayed_cluster_points += c.points.length;
+                         display_stats.displayed_points += c.points.length;
+                     } else if (jQuery('#id_show_location_points').is(':checked')) {
+                         chart.addPoints(0, c.points, '#00001a');
+                         display_stats.displayed_points += c.points.length;
+                     }
+                 });
+                 if (jQuery('#id_show_location_points').is(':checked')) {
+                     if (jQuery('#id_zoom_cluster_region').is(':checked')) {
+                         chart.addPoints(0, cluster_region_points, '#00001a'); 
+                         display_stats.displayed_points += cluster_region_points.length; 
+                     } else {
+                         chart.addPoints(0, entire_region_points, '#00001a');
+                         display_stats.displayed_points += entire_region_points.length;
+                     }
+                 }
+                jQuery('#id_cluster_count').html(display_stats.displayed_clusters); 
+                jQuery('#id_cluster_point_count').html(display_stats.displayed_cluster_points); 
+                jQuery('#id_point_count').html(display_stats.displayed_points); 
+                chart.drawLabels(); 
+                chart.redraw(); 
+             } 
+             window.addEvent('domready', function(){ 
+                try { 
+                     if ( clusters.every(function(c) { return c.significant == false; }))
+                         jQuery('#id_view_all').prop('checked', true);
+                     //if ( clusters.every(function(c) { return c.hierarchical == false; }))
+                     //    jQuery('#id_hierarchical').prop('checked', false);
+                     //if (clusters.every(function(c) { return c.gini == false; }))
+                     //    jQuery('#id_gini').prop('checked', false);
+                     jQuery('#id_rates_option').toggle(parameters.scanrate == 3);
+                     jQuery('#id_secondary_clusters_option').toggle(parameters.giniscan);
+                     showGraph();
+                     jQuery('.options-row :input').on('click', function(){ showGraph(); });
+                     jQuery('.title-setter').keyup(function() { showGraph(); });
+                     jQuery(window).resizeend(function() { showGraph(); });
+                     jQuery('#print_png').on('click', function(){
+                         var filename = chart.options.title || 'cluster-graph';
+                         chart.canvas.toBlob(function(blob) {
+                             saveAs(blob, filename + '.png');
+                         });
+                         return false;
+                     });
+                } catch (error) { 
+ 				   jQuery('#load_error').html('There was a problem loading the graph. Please <a href="mailto:techsupport@satscan.org?Subject=Graph%20Error" target="_top">email</a> technical support and attach the file:<br/>' + window.location.href.replace('file:///', '').replace(/%20/g, ' ') ).show(); 
+              	   throw( error ); 
+                 } 
+             }); 
+         </script> 
+     </head> 
+     <body style="margin:0;background-color: #fff;"> 
+         <table id="id_banner" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#F8FAFA" style="border-bottom: 3px double navy;"> 
+         <tbody><tr> 
+         <td width="120" align="center" bgcolor="#DBD7DB"><img src="https://www.satscan.org/images/swe2.jpg" alt="&Ouml;stersund map" title="Östersund map" width="120" height="115" hspace="1" border="0"></td> 
+         <td align="right" bgcolor="#D4DCE5"><img src="https://www.satscan.org/images/satscan_title2.jpg" alt="SaTScan&#0153; - Software for the spatial, temporal, and space-time scan statistics" title="SaTScan&#0153; - Software for the spatial, temporal, and space-time scan statistics" width="470" height="115"></td> 
+         <td width="25%" bgcolor="#F8FAFA" align="right"><img src="https://www.satscan.org/images/nyc2.jpg" alt="New York City map" title="New York City map" width="112" height="115" hspace="1" border="0" align="middle"></td> 
+         </tr></tbody></table> 
+ 		<div id="load_error" style="color:#101010; text-align: center;font-size: 1.2em; padding: 20px;background-color: #ece1e1; border: 1px solid #e49595; display:none;"></div> 
+     <div class="container-fluid main-content"> 
+         <div class="row"> 
+             <div class="col-md-3 chart-options-section"> 
+                 <fieldset> 
+                 <div class="options-row"> 
+                     <label class="option-section" for="title_obs">Title</label> 
+                     <div>
+                         <input type="text" style="width:95%;padding:1px;" class="title-setter" id="title_obs" value="Cartesian Coordinates Map"> 
+                         <p class="help-block">Title can be changed by editing this text.</p> 
+                     </div> 
+                 </div> 
+                 <div class="options-row"> 
+                     <label class="option-section" for="title_obs">Print</label> 
+                     <div class="print-section"> 
+                         <a href="#" onclick="javascript:window.print();return false;"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print</a> 
+                         <a href="#" id="print_png"><span class="glyphicon glyphicon-picture" aria-hidden = "true"></span> Save Image</a> 
+                     </div> 
+                 </div> 
+                 <div class="options-row"> 
+                     <div id="id_significance_option">
+                         <label><input type="radio" name="view_significance" id="id_view_significant" value="entire" checked=checked />Significant clusters</label>
+                         <label><input type="radio" name="view_significance" id="id_view_all" value="cluster" />All clusters</label>
+                         <p class="help-block">Toggle display between significant and all clusters.</p>
+                     </div>
+                     <div id="id_rates_option"> 
+                         <label><input type="radio" name="view_rate" id="id_view_highlow" value="entire" checked=checked />High and low clusters</label>
+                         <label><input type="radio" name="view_rate" id="id_view_high" value="cluster"/>High only</label>
+                         <label><input type="radio" name="view_rate" id="id_view_low" value="cluster"/>Low only</label>
+                         <p class="help-block">Toggle display of clusters for scan rate.</p>
+                     </div> 
+                     <div id="id_secondary_clusters_option"> 
+                         <div>Secondary Clusters:</div>
+                         <label style="margin-left:15px;"><input type="checkbox" id="id_hierarchical" value="secondary" />Hierarchical</label>
+                         <label style="margin-left:15px;"><input type="checkbox" id="id_gini" value="secondary" />Gini</label>
+                         <p class="help-block">Display options for secondary clusters.</p>
+                     </div> 
+                     <div>Show clusters using:</div>
+                     <label style="margin-left:15px;"><input type="checkbox" id="id_cluster_circles" value="cluster" checked=checked />Circles / Ellipses</label>
+                     <label style="margin-left:15px;"><input type="checkbox" id="id_cluster_locations" value="cluster" />Locations</label>
+                     <p class="help-block">Display options for clusters.</p>
+                     <div id="id_zoom_cluster_option" style="display:none;">
+                     <label><input type="checkbox" id="id_zoom_cluster_region"/>Zoom in on cluster region</label>
+                     <p class="help-block">Focus grid region on reported clusters.</p>
+                     </div>
+                     <label><input type="checkbox" id="id_show_grid_lines" checked=checked />Show grid lines</label>
+                     <p class="help-block">Toggle display of graph grid lines.</p>
+                     <label><input type="checkbox" id="id_show_axes" checked=checked />Show x and y axes</label>
+                     <p class="help-block">Toggle display of graph x / y axes.</p>
+                     <label><input type="checkbox" id="id_show_location_points" checked=checked />Show all location points</label>
+                     <p class="help-block">Toggle display of location points.</p>
+                     <label><input type="checkbox" id="id_fit_graph_viewport" />Fit graph to viewport</label>
+                     <p class="help-block">Attempts to keep entire graph in view.</p>
+                 </div> 
+                 <div id="id_display_count">
+                     <fieldset>
+                             <legend style="font-size:14px; margin-bottom:0;">Display Data:</legend>
+                             <div><span id="id_cluster_count"></span> Clusters</div>
+                             <div><span id="id_cluster_point_count"></span> Cluster Locations</div>
+                             <div><span id="id_point_count"></span> Total Locations</div> 
+                     </fieldset>
+                 </div>
+                 </fieldset> 
+                 <div style="font-style:italic; font-size:smaller;">Generated with SaTScan v9.6</div>
+             </div> 
+             <div class="col-md-9 chart-column"> 
+                 <div id='chartContainer' name='chartContainer'></div> 
+             </div> 
+         </div> 
+      </div> 
+      </body> 
+ </html> 
+
+

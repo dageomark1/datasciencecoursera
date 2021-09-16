@@ -1,0 +1,239 @@
+                                 _____________________________
+
+                                         SaTScan v9.6
+                                 _____________________________
+
+resultatpopcom
+
+Program run on: Mon Sep 30 10:50:43 2019
+
+Purely Spatial analysis
+scanning for clusters with high or low rates
+using the Discrete Poisson model.
+_______________________________________________________________________________________________
+
+SUMMARY OF DATA
+
+Study period.......................: 2019/1/1 to 2019/12/31
+Number of locations................: 6
+Population, averaged over time.....: 22872
+Total number of cases..............: 168
+Annual cases / 100000..............: 735.0
+_______________________________________________________________________________________________
+
+CLUSTERS DETECTED
+
+1.Location IDs included.: 2
+  Overlap with clusters.: No Overlap
+  Coordinates / radius..: (6.583719 N, 2.551964 E) / 0 km
+  Gini Cluster..........: Yes
+  Population............: 2309
+  Number of cases.......: 68
+  Expected cases........: 16.96
+  Annual cases / 100000.: 2947.0
+  Observed / expected...: 4.01
+  Relative risk.........: 6.06
+  Log likelihood ratio..: 53.190332
+  Monte Carlo rank......: 1/1000
+  P-value...............: < 0.00000000000000001
+
+2.Location IDs included.: 3
+  Overlap with clusters.: No Overlap
+  Coordinates / radius..: (6.736827 N, 2.663607 E) / 0 km
+  Gini Cluster..........: Yes
+  Population............: 8303
+  Number of cases.......: 13
+  Expected cases........: 60.99
+  Annual cases / 100000.: 156.7
+  Observed / expected...: 0.21
+  Relative risk.........: 0.15
+  Log likelihood ratio..: 37.329850
+  Monte Carlo rank......: 1/1000
+  P-value...............: < 0.00000000000000001
+
+3.Location IDs included.: 6
+  Overlap with clusters.: No Overlap
+  Coordinates / radius..: (6.591543 N, 1.680928 E) / 0 km
+  Gini Cluster..........: Yes
+  Population............: 3374
+  Number of cases.......: 7
+  Expected cases........: 24.78
+  Annual cases / 100000.: 207.6
+  Observed / expected...: 0.28
+  Relative risk.........: 0.25
+  Log likelihood ratio..: 9.994078
+  Monte Carlo rank......: 1/1000
+  P-value...............: 0.000012
+
+4.Location IDs included.: 5
+  Overlap with clusters.: No Overlap
+  Coordinates / radius..: (6.523316 N, 2.663607 E) / 0 km
+  Gini Cluster..........: No
+  Population............: 3229
+  Number of cases.......: 31
+  Expected cases........: 23.72
+  Annual cases / 100000.: 960.7
+  Observed / expected...: 1.31
+  Relative risk.........: 1.38
+  Log likelihood ratio..: 1.205372
+  Monte Carlo rank......: 516/1000
+  P-value...............: 0.516
+
+5.Location IDs included.: 4
+  Overlap with clusters.: No Overlap
+  Coordinates / radius..: (6.532191 N, 1.870861 E) / 0 km
+  Gini Cluster..........: No
+  Population............: 5007
+  Number of cases.......: 44
+  Expected cases........: 36.78
+  Annual cases / 100000.: 879.4
+  Observed / expected...: 1.20
+  Relative risk.........: 1.27
+  Log likelihood ratio..: 0.869352
+  Monte Carlo rank......: 697/1000
+  P-value...............: 0.697
+
+A cluster is statistically significant when its log likelihood ratio is greater than the
+critical value, which is, for significance level:
+
+Gumbel Critical Values:
+... 0.00001: 10.152033
+.... 0.0001: 8.326797
+
+Standard Monte Carlo Critical Values:
+..... 0.001: 6.445109
+...... 0.01: 5.007092
+...... 0.05: 3.411302
+_______________________________________________________________________________________________
+
+Gini Indexes
+----------------------------------------------------------
+1 percent.............: 0
+2 percent.............: 0
+3 percent.............: 0
+4 percent.............: 0
+5 percent.............: 0
+6 percent.............: 0
+8 percent.............: 0
+10 percent............: 0
+12 percent............: 0.3038
+15 percent............: 0.3542
+20 percent............: 0.3542
+25 percent............: 0.3542
+30 percent............: 0.3542
+40 percent............: 0.5044
+50 percent............: 0.5044
+Optimal Gini coefficient found at 40% maxima.
+Coefficients based on clusters with p<0.050.
+_______________________________________________________________________________________________
+
+PARAMETER SETTINGS
+
+Input
+-----
+  Case File        : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\popcom.cas
+  Population File  : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\popcom.pop
+  Time Precision   : Year
+  Start Time       : 2019/1/1
+  End Time         : 2019/12/31
+  Coordinates File : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\popcom.geo
+  Grid File        : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\popcom.grd
+  Coordinates      : Latitude/Longitude
+
+Analysis
+--------
+  Type of Analysis    : Purely Spatial
+  Probability Model   : Discrete Poisson
+  Scan for Areas with : High or Low Rates
+
+Output
+------
+  Main Results File       : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.txt
+  Cluster File            : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.col.txt
+  Google Earth File       : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.kml
+  Google Maps File        : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.clustermap.html
+  Shapefile               : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.clustermap.col.shp
+  Cartesian Graph File    : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.cluster.html
+  Cluster File            : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.cluster.col.dbf
+  Stratified Cluster File : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.cluster.sci.txt
+  Stratified Cluster File : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.cluster.sci.dbf
+  Location File           : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.cluster.gis.txt
+  Location File           : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.cluster.gis.dbf
+  Risk Estimates File     : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.cluster.rr.txt
+  Risk Estimates File     : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.cluster.rr.dbf
+  Simulated LLRs File     : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.cluster.llr.txt
+  Simulated LLRs File     : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\respopcom.cluster.llr.dbf
+
+Data Checking
+-------------
+  Temporal Data Check     : Check to ensure that all cases and controls are within the specified temporal study period.
+  Geographical Data Check : Check to ensure that all observations (cases, controls and populations) are within the specified geographical area.
+
+Spatial Neighbors
+-----------------
+  Use Non-Euclidian Neighbors file : No
+  Use Meta Locations File          : No
+  Multiple Coordinates Type        : Allow only one set of coordinates per location ID.
+
+Spatial Window
+--------------
+  Maximum Spatial Cluster Size : 50 percent of population at risk
+  Maximum Spatial Cluster Size : 50 percent of population defined in max circle file
+  Max Circle Size File         : D:\Desktop\dageomark_donnees\satscan_bbtd\satscan_global\popcom.max
+  Maximum Spatial Cluster Size : 0.1 km
+  Window Shape                 : Circular
+  Isotonic Scan                : No
+
+Cluster Restrictions
+--------------------
+  Minimum Cases in Cluster for High Rates : 2
+  Restrict High Rate Clusters             : No
+  Restrict Low Rate Clusters              : No
+
+Space And Time Adjustments
+--------------------------
+  Adjust for known relative risks : No
+
+Inference
+---------
+  P-Value Reporting                  : Default Combination
+  Number of Replications             : 999
+  Adjusting for More Likely Clusters : No
+
+Border Analysis
+---------------
+  Report Oliveira's F : No
+
+Spatial Output
+--------------
+  Automatically Launch Map                  : Yes
+  Compress KML File into KMZ File           : No
+  Include All Location IDs in the Clusters  : Yes
+  Cluster Location Threshold - Separate KML : 1000
+  Report Hierarchical Clusters              : Yes
+  Criteria for Reporting Secondary Clusters : No Geographical Overlap
+  Report Gini Optimized Cluster Collection  : Yes
+  Gini Index Based Collection Reporting     : Optimal Only
+  Report Gini Index Cluster Coefficents     : Yes
+  Restrict Reporting to Smaller Clusters    : Yes
+  Reported Clusters                         : Only clusters smaller than 50 percent of population at risk reported.
+  Reported Clusters                         : Only clusters smaller than 50 percent of population defined in max circle file reported.
+  Reported Clusters                         : Only clusters smaller than 0.1 km reported.
+
+Other Output
+------------
+  Report Critical Values     : Yes
+  Report Monte Carlo Rank    : Yes
+  Print ASCII Column Headers : Yes
+  User Defined Title         : resultatpopcom
+
+Run Options
+-----------
+  Processor Usage   : All Available Processors
+  Suppress Warnings : No
+  Logging Analysis  : No
+_______________________________________________________________________________________________
+
+Program completed  : Mon Sep 30 10:50:43 2019
+Total Running Time : 0 seconds
+Processor Usage    : 4 processors
