@@ -14,27 +14,54 @@ for (i in 1:ncol(carine)){
 
 str(carine)
 
+##
+attach(carine)
+# create a cross tabulation of Commune and FVs_oui_non status  
+FVs_by_Commune <- table(Commune, FVs_oui_non) 
+
+# output the frequencies of diabetes status by age 
+freq_table <- prop.table(FVs_by_Commune, margin = 1) 
+
+# calculate the odds of having diabetes 
+odds <- freq_table[, "1"]/freq_table[, "0"] 
+
 ############# Logit #############
 logit = glm(FVs_oui_non~.,data = carine,family = binomial())
 summary(logit)
 
-exp(cbind(coef(logit), confint.default(logit)))
-exp(coef(logit))
-confint.default(logit)
+####
+## Exponentiated coefficients and confident interval
+cbind(Estimate= coef(logit),
+      Oddratio = exp(coef(logit)), 
+      confint.default(logit))
 
-library(broom)
-oddratio <- tidy(logit, confint.default = T, exponentiate = TRUE)
-library(knitr)
-kable(oddratio)
+cbind(Oddratio = exp(coef(logit)), 
+      confint.default(logit))
+
+## c-statistic
+require(DescTools) 
+Cstat(logit)
+
+## Pertinence du modèle
+# run Hosmer-Lemeshow test 
+require(ResourceSelection)
+hoslem.test(x = logit$y, y = fitted(logit), g = 10)
+
+require(generalhoslem) 
+## Loading required package: generalhoslem 
+## Warning: package 'generalhoslem' was built under R version 3.5.1 
+## Loading required package: reshape 
+## Warning: package 'reshape' was built under R version 3.5.1 
+## Loading required package: MASS
+
+# run Hosmer-Lemeshow test 
+logitgof(obs = logit$y, exp = fitted(logit), g = 10)
+
+
 
 library(forestmodel)
 forest_model(logit,exponentiate = T)
 
-## Pertinence du mod?le
-library(ResourceSelection)
-hoslem.test(x = as.numeric(carine$FVs_oui_non)-1,
-            fitted(logit,g=10))
-hoslem.test(carine$FVs_oui_non,fitted(logit),g=10)
 
 ## M?thodes : Pour ?valuer la Qualit? du mod?le de r?gression logistique, on pr?conise :
 # Le taux d'erreur,
@@ -44,10 +71,10 @@ pred1.mod <-  factor(ifelse(pred1.prob > 0.5, "1", "0"))
 pred1.mod
 
 ## matrice de confusion
-mc1 <- table(carine$FVs_oui_non,pred1.mod)
+mc1 <- table(logit$y,pred1.mod)
 mc1
 
-## taux d'erreur :qualit? pr?dictive du mod?le est mauvaise lorsque t > 0.5
+## taux d'erreur :qualité prédictive du modèle est mauvaise lorsque t > 0.5
 ## Ce taux est la proportion des modalit?s pr?dites qui diff?rent des modalit?s observ?es
 t1 <- (mc1[1, 2] + mc1[2, 1]) / sum(mc1)
 t1
